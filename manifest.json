@@ -17,15 +17,23 @@
     "default_popup": "src/page_action/page_action.html"
   },
   "permissions": [
-    "https://www.amazon.com/*"
+    "https://www.amazon.com/*",
+    "https://smile.amazon.com/*"
   ],
   "content_scripts": [
     {
       "matches": [
-        "https://www.amazon.com/*"
+        "https://www.amazon.com/*",
+        "https://smile.amazon.com/*"
+      ],
+      "css":        [
+        "materialize/css/roboto.css",
+        "materialize/css/materialize.min.css",
+        "css/index.css"
       ],
       "js": [
         "js/jquery/jquery.min.js",
+        "materialize/js/materialize.min.js",
         "src/inject/inject.js"
       ]
     }

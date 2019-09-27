@@ -1,0 +1,57 @@
+.fullscreen {
+    /*display:block;*/
+    max-height: 100%;
+    width: 100vw;
+    height: 100vh;
+    top: 0%!important;
+}
+
+#add-to-cart-prompt {
+    background: url('https://i.imgur.com/NAGqa83.jpg') center center no-repeat;
+    /* Darken the background image with black */
+    background-color: rgba(0, 0, 0, 0.4);
+    background-blend-mode: darken;
+    background-size: cover;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+#add-to-cart-prompt * {
+    z-index: 10000;
+}
+
+.amazon-smile {
+    background-color: #e47911;
+}
+
+.modal-content {
+    margin-top: 60px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#prompt-title {
+    font-size: 6.0em;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+#prompt-subheading {
+    margin-bottom: 60px;
+}
+
+.btn-group {
+    margin-bottom: 40px;
+}
+
+.btn-group button {
+    margin-right: 16px;
+}
+
+.action-heading {
+    margin-bottom: 12px;
+}
+
+.em-inline {
+    margin-right: 12px;
+}
