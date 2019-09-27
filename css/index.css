@@ -31,17 +31,18 @@
 }
 
 #prompt-title {
-    font-size: 6.0em;
-    font-weight: bold;
+    font-size: 5.5em;
+    font-weight: 900;
     margin-bottom: 12px;
 }
 
 #prompt-subheading {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+    font-size: 2.2em;
 }
 
 .btn-group {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .btn-group button {
@@ -49,7 +50,8 @@
 }
 
 .action-heading {
-    margin-bottom: 12px;
+    font-size: 3em;
+    margin-bottom: 4px;
 }
 
 .em-inline {
