@@ -1,5 +1,5 @@
 {
-  "name": "Do You Really Need This?",
+  "name": "Do You Really Need That?",
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "Promotes investing & donations when attempting to make online purchases.",
@@ -10,7 +10,7 @@
     "128": "icons/icon128.png"
   },
   "default_locale": "en",
-  "options_page": "src/options_custom/index.html",
+  "options_page": "src/options/index.html",
   "page_action": {
     "default_icon": "icons/icon19.png",
     "default_title": "page action demo",
@@ -18,7 +18,8 @@
   },
   "permissions": [
     "https://www.amazon.com/*",
-    "https://smile.amazon.com/*"
+    "https://smile.amazon.com/*",
+    "storage"
   ],
   "content_scripts": [
     {
@@ -37,5 +38,10 @@
         "src/inject/inject.js"
       ]
     }
-  ]
+  ],
+  "web_accessible_resources": ["src/options/index.html"],
+  "background": {
+    "scripts": ["src/background/background.js"],
+    "persistent": false
+  }
 }

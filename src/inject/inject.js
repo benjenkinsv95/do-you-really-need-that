@@ -2,7 +2,12 @@ $.fn.outerHTML = function() {
 	return jQuery('<div />').append(this.eq(0).clone()).html();
 }
 
-const initPrompt = () => {
+
+
+
+
+
+const initPrompt = (name, investmentUrl, donationUrl) => {
 	const url = window.location.href
 	const smileUrl = url.replace('www.amazon', 'smile.amazon')
 	const onAmazonSmile = url === smileUrl
@@ -11,9 +16,7 @@ const initPrompt = () => {
 		: `<a href="${smileUrl}"><button class="waves-effect waves-light btn-small orange darken-1">Go to Amazon Smile</button></a>`
 
 
-	const investmentUrl = 'https://www.betterment.com/'
-	const donationUrl = 'https://water.org/donate/'
-	const name = 'Ben'
+
 
 	const findPrice = () => {
 		const priceStr = $('#priceblock_ourprice').text()
@@ -42,13 +45,15 @@ const initPrompt = () => {
         <h2 class="action-heading">Yes, I need this item. I'd like to...</h2>
         <div class="btn-group">
           ${smileHtml}
-          <button id="confirm-add-to-cart" class="waves-effect btn-small grey lighten-2 black-text text-darken-2">Add to cart</button>
+          <button id="confirm-add-to-cart" class="waves-effect btn-small grey lighten-2 black-text text-darken-2">Add item to cart</button>
         </div>
 	</div>
 </div>
 		`
 	$('body').append(modal)
 	$('#add-to-cart-prompt').modal();
+
+
 }
 
 const prompt = (successCallback) => {
@@ -67,6 +72,8 @@ const prompt = (successCallback) => {
 	$('#go-back-button').on('click', () => {
 		$('#add-to-cart-prompt').modal('close');
 	})
+
+
 }
 
 const wrapButtonWithPrompt = (addToCartButton) => {
@@ -102,28 +109,55 @@ const wrapButtonWithPrompt = (addToCartButton) => {
 	})
 }
 
-chrome.extension.sendMessage({}, function(response) {
-	var readyStateCheckInterval = setInterval(function() {
-	if (document.readyState === "complete") {
-		clearInterval(readyStateCheckInterval);
-
-		// ----------------------------------------------------------
-		// This part of the script triggers when page is done loading
-		console.log("Hello. This message was sent from scripts/inject.js");
-
-		const addToCartButton = $('#add-to-cart-button')
-		if (!addToCartButton) {
-			console.error('No add to cart button found!')
-			return
-		}
-
-		wrapButtonWithPrompt(addToCartButton)
-		// ----------------------------------------------------------
-
-	}
-	}, 0.5);
-});
-
 $(() => {
-	initPrompt()
+	chrome.extension.sendMessage({}, function(response) {
+		var readyStateCheckInterval = setInterval(function() {
+		if (document.readyState === "complete") {
+			clearInterval(readyStateCheckInterval);
+
+			// ----------------------------------------------------------
+			// This part of the script triggers when page is done loading
+			console.log("Hello. This message was sent from scripts/inject.js");
+
+			chrome.storage.sync.get({
+				preferredName: '',
+				investmentUrl: '',
+				donationUrl: ''
+			}, function(items) {
+				const preferredName = items.preferredName
+				let investmentUrl = items.investmentUrl
+				let donationUrl = items.donationUrl
+
+				console.log(items, preferredName, investmentUrl, donationUrl)
+				if (!preferredName || !investmentUrl || !donationUrl) {
+					if (chrome.runtime.openOptionsPage) {
+						chrome.runtime.openOptionsPage();
+					} else {
+						window.open(chrome.runtime.getURL('src/options/index.html'));
+					}
+					return
+				}
+
+				// make sure our links are proper http links
+				investmentUrl = investmentUrl.startsWith('http') ? investmentUrl : 'https://' + investmentUrl
+				donationUrl = donationUrl.startsWith('http') ? donationUrl : 'https://' + donationUrl
+				initPrompt(preferredName, investmentUrl, donationUrl)
+
+
+				const addToCartButton = $('#add-to-cart-button')
+				if (!addToCartButton) {
+					console.error('No add to cart button found!')
+					return
+				}
+
+				wrapButtonWithPrompt(addToCartButton)
+			});
+			// ----------------------------------------------------------
+
+		}
+		}, 0.5);
+	});
+
+
+
 })
