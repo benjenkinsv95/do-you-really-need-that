@@ -29,8 +29,8 @@ const initPrompt = () => {
 	const modal = `
 <div id="add-to-cart-prompt" class="modal fullscreen">
 	<div class="modal-content">
-        <h1 id="prompt-title">Do you really <em class="em-inline">need</em> this, ${name}?</h1>
-        <h4 id="prompt-subheading">This item costs <span class="green-text">$${price}</span>, but could be worth over <span class="green-text">$${priceAfter30YearInvestment}</span> in 30 years if invested!</h4>
+        <h1 id="prompt-title">Do you really <em class="em-inline">need</em> that, ${name}?</h1>
+        <h4 id="prompt-subheading">That item costs <span class="green-text">$${price}</span>, but could be worth over <span class="green-text">$${priceAfter30YearInvestment}</span> in 30 years if invested!</h4>
         
         <h2 class="action-heading">No, I don't need this item. Instead, I'd like to...</h2>
         <div class="btn-group">
