@@ -13,12 +13,24 @@ const initPrompt = () => {
 
 	const investmentUrl = 'https://www.betterment.com/'
 	const donationUrl = 'https://water.org/donate/'
+	const name = 'Ben'
+
+	const findPrice = () => {
+		const priceStr = $('#priceblock_ourprice').text()
+		console.log(priceStr)
+		return parseFloat(priceStr.substring(1))
+	}
+
+	const price = findPrice()
+
+
+	const priceAfter30YearInvestment = (price * 3.2).toFixed(2)
 
 	const modal = `
 <div id="add-to-cart-prompt" class="modal fullscreen">
 	<div class="modal-content">
-        <h1 id="prompt-title">Do you really <em class="em-inline">need</em> this, Ben?</h1>
-        <h4 id="prompt-subheading">This item costs <span class="green-text">$10</span>, but could be worth over <span class="green-text">$32</span> in 30 years if invested!</h4>
+        <h1 id="prompt-title">Do you really <em class="em-inline">need</em> this, ${name}?</h1>
+        <h4 id="prompt-subheading">This item costs <span class="green-text">$${price}</span>, but could be worth over <span class="green-text">$${priceAfter30YearInvestment}</span> in 30 years if invested!</h4>
         
         <h2 class="action-heading">No, I don't need this item. Instead, I'd like to...</h2>
         <div class="btn-group">
@@ -30,7 +42,7 @@ const initPrompt = () => {
         <h2 class="action-heading">Yes, I need this item. I'd like to...</h2>
         <div class="btn-group">
           ${smileHtml}
-          <button id="confirm-add-to-cart" class="waves-effect btn-small grey lighten-2 black-text text-darken-2">Add to cart Cart</button>
+          <button id="confirm-add-to-cart" class="waves-effect btn-small grey lighten-2 black-text text-darken-2">Add to cart</button>
         </div>
 	</div>
 </div>
@@ -112,4 +124,6 @@ chrome.extension.sendMessage({}, function(response) {
 	}, 0.5);
 });
 
-initPrompt()
+$(() => {
+	initPrompt()
+})
