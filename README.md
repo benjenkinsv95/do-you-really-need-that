@@ -109,6 +109,6 @@ Project Link: [https://github.com/benjenkinsv95/do-you-really-need-that](https:/
 [issues-shield]: https://img.shields.io/github/issues/benjenkinsv95/do-you-really-need-that.svg?style=flat-square
 [issues-url]: https://github.com/benjenkinsv95/do-you-really-need-that/issues
 [license-shield]: https://img.shields.io/github/license/benjenkinsv95/do-you-really-need-that.svg?style=flat-square
-[license-url]: https://github.com/benjenkinsv95/do-you-really-need-that/blob/master/LICENSE.txt
+[license-url]: https://github.com/benjenkinsv95/do-you-really-need-that/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/benjenkinsv95
